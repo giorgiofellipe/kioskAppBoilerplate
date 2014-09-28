@@ -5,11 +5,20 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="10"/>
     <application android:label="@string/app_name">
+        <!-- android:launchMode="singleTask": This sets the app as the default choice when prompted to select the home app -->
         <activity android:name="MainActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name"
+                  android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- Instead of only be launched this set the app as the home app,
+                     so when pressed the home button it will ask to choose what
+                     home app you want to launch.
+                     When the main activity is set as singleTask launchMode the
+                     device will identify this app as default option, so if you
+                     click "Always" at the first prompt it will never ask again -->
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
