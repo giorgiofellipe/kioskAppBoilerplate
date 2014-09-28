@@ -8,12 +8,12 @@ This implements a few neat methods to prevent a user performing a particular act
 Features
 -----
 
-- [ ] Prevent exiting the app via the back button
-- [ ] Disable the home button
-- [ ] Disable the volume buttons
-- [ ] Set the app as a default home screen
-- [ ] Prevent screen dimming
-- [ ] Set the app to cover the lock screen
+- [X] Prevent exiting the app via the back button
+- [X] Disable the home button
+- [X] Disable the volume buttons
+- [X] Set the app as a default home screen
+- [X] Prevent screen dimming
+- [X] Set the app to cover the lock screen
 - [ ] Hide top and bottom bar (needs root)
 
 
