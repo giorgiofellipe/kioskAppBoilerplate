@@ -20,9 +20,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Removes App Title
+        //Removes App Title (Can be done defining the theme in manifest file)
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //Toggles app to Fullscreen mode removing status bar
+        //Toggles app to Fullscreen mode removing status bar (Can be done defining the theme in manifest file)
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //Prevents screen turn off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -33,6 +33,8 @@ public class MainActivity extends Activity {
          */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+
+        hideBar();
 
         setContentView(R.layout.main);
     }
@@ -72,6 +74,28 @@ public class MainActivity extends Activity {
             return true;
         } else {
             return super.dispatchKeyEvent(event);
+        }
+    }
+
+    private void hideBar(){
+        try {
+            String command;
+            command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib service call activity 42 s16 com.android.systemui";
+            Process proc = Runtime.getRuntime().exec(new String[] { "su", "-c", command });
+            proc.waitFor();
+        } catch(Exception ex) {
+            Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void showBar() {
+        try {
+            String command;
+            command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib am startservice -n com.android.systemui/.SystemUIService";
+            Process proc = Runtime.getRuntime().exec(new String[] { "su", "-c", command });
+            proc.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
